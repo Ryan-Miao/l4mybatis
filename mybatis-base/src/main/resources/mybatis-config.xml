@@ -6,7 +6,6 @@
     <properties resource="db.properties"/>
 
     <typeAliases>
-        <!--简化mapper.xml中实体的的命名，否则mapper.xml中的实体必须为全限定名称-->
         <package name="com.test.start.model"/>
     </typeAliases>
 
