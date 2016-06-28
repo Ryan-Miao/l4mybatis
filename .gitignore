@@ -4,6 +4,7 @@
 mybatis.iml
 *.impl
 */impl
+*/target/
 
 
 
