@@ -36,6 +36,7 @@ public class PersonMapperTest {
         PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
         HashMap map = mapper.selectPerson(1);
         System.out.println(map);
+        assertEquals(map.get("name").toString(),"Ryan");
     }
 
 }
