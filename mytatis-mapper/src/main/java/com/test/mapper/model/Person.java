@@ -1,20 +1,20 @@
-package com.test.start.model;
+package com.test.mapper.model;
+
+import java.io.Serializable;
 
 /**
- * Created by miaorf on 2016/6/27.
+ * Created by miaorf on 2016/7/6.
  */
-public class Blog {
-    private int id;
+public class Person implements Serializable {
+
+    private Integer id;
     private String name;
 
-    public Blog() {
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -28,7 +28,7 @@ public class Blog {
 
     @Override
     public String toString() {
-        return "Blog{" +
+        return "Person{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

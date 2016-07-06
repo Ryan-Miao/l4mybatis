@@ -3,18 +3,14 @@ package com.test.start;
 import com.test.start.mapper.BlogMapper;
 import com.test.start.model.Blog;
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.junit.Test;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by miaorf on 2016/6/27.
@@ -22,19 +18,28 @@ import java.io.InputStream;
 public class MybatisStarter {
 
     public static void main(String[] args) throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-
-        SqlSession session = sqlSessionFactory.openSession();
+        SqlSession session = getSqlSession();
         try {
             BlogMapper mapper = session.getMapper(BlogMapper.class);
-            Blog blog = mapper.selectBlog(1);
+            Blog blog = mapper.selectById(1);
             System.out.println(blog);
+
+            List<Blog> blogs = mapper.selectAll();
+            System.out.println(blogs);
         } finally {
             session.close();
         }
     }
+
+    private static SqlSession getSqlSession() throws IOException {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        return sqlSessionFactory.openSession();
+    }
+
+
 
     @Test
     public void sqlSessionByJava(){
