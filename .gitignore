@@ -3,8 +3,10 @@
 .idea/
 mybatis.iml
 *.impl
-*/impl
+
+*/*.iml
 */target/
+*/log/
 
 
 
