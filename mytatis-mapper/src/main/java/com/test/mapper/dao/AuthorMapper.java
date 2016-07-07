@@ -8,8 +8,9 @@ import java.util.List;
 /**
  * Created by miaorf on 2016/7/6.
  */
-public interface PersonMapper {
+public interface AuthorMapper {
 
-    HashMap selectPerson(int id);
+    int insertAuthor(Author author);
 
+    int insertAuthors(List<Author> list);
 }
