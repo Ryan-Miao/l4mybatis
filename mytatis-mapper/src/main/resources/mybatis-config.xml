@@ -22,5 +22,6 @@
     </environments>
     <mappers>
         <mapper resource="com.test.mapper.mapper/PersonMapper.xml"/>
+        <mapper resource="com.test.mapper.mapper/AuthorMapper.xml"/>
     </mappers>
 </configuration>

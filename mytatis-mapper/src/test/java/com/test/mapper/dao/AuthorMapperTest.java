@@ -11,15 +11,14 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 /**
- * Created by miaorf on 2016/7/6.
+ * Created by miaorf on 2016/7/7.
  */
-public class PersonMapperTest {
+public class AuthorMapperTest {
     private SqlSession sqlSession;
     private static SqlSessionFactory sqlSessionFactory;
 
@@ -35,13 +34,27 @@ public class PersonMapperTest {
     }
 
     @Test
-    public void selectPersonTest() throws Exception {
-        PersonMapper mapper = sqlSession.getMapper(PersonMapper.class);
-        HashMap map = mapper.selectPerson(1);
-        System.out.println(map);
-        assertEquals(map.get("name").toString(),"Ryan");
+    public void insertAuthorTest() throws  Exception{
+        AuthorMapper mapper = sqlSession.getMapper(AuthorMapper.class);
+        Author ryan = new Author("Ryan", "123456", "qweqwe@qq.com", "this is a blog");
+        int result = mapper.insertAuthor(ryan);
+        sqlSession.commit();
+
+        assertNotNull(ryan.getId());
     }
 
+    @Test
+    public void insertAuthorsTest() throws  Exception{
+        AuthorMapper mapper = sqlSession.getMapper(AuthorMapper.class);
+        List<Author> list = new ArrayList<Author>();
+        for (int i = 0; i < 3; i++) {
+            list.add(new Author("Ryan"+i, "123456", "qweqwe@qq.com", "this is a blog"));
+        }
 
+        int result = mapper.insertAuthors(list);
+        sqlSession.commit();
+
+        assertNotNull(list.get(2).getId());
+    }
 
 }
