@@ -16,6 +16,23 @@
         </foreach>
     </insert>
 
+    <select id="selectAuthorById" resultType="author">
+        SELECT * FROM author WHERE id = #{id}
+    </select>
+
+    <update id="updateAuthor" >
+        update Author set
+            username = #{username},
+            password = #{password},
+            email = #{email},
+            bio = #{bio}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAuthor">
+        delete from Author where id = #{id}
+    </delete>
+
 
 
 
