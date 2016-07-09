@@ -62,4 +62,15 @@ public class Author implements Serializable {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
 }

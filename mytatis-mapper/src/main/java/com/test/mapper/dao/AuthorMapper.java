@@ -13,4 +13,10 @@ public interface AuthorMapper {
     int insertAuthor(Author author);
 
     int insertAuthors(List<Author> list);
+
+    Author selectAuthorById(int id);
+
+    int updateAuthor(Author author);
+
+    int deleteAuthor(int id);
 }
