@@ -19,4 +19,12 @@ public interface AuthorMapper {
     int updateAuthor(Author author);
 
     int deleteAuthor(int id);
+
+    List<Author> selectAuthor();
+
+    List<Author> selectAuthorName(Integer id);
+
+    List<Author> selectAuthor2Construct();
+
+
 }
