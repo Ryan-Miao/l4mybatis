@@ -75,7 +75,7 @@ public class AuthorMapperTest {
     }
 
     @Test
-    public void TestUpdateAuthorEffective() throws Exception{
+    public void testUpdateAuthorEffective() throws Exception{
         Author author = mapper.selectAuthorById(3);
         author.setBio("I have changed the bio");
         int i = mapper.updateAuthor(author);
@@ -83,7 +83,7 @@ public class AuthorMapperTest {
         assertTrue(i>0);
     }
     @Test
-    public void TestUpdateAuthorInEffective() throws Exception{
+    public void testUpdateAuthorInEffective() throws Exception{
         Author author = mapper.selectAuthorById(3);
         author.setId(1024);
         int i = mapper.updateAuthor(author);
@@ -92,14 +92,31 @@ public class AuthorMapperTest {
     }
 
     @Test
-    public void TestDeleteAuthorEffective() throws Exception{
+    public void testDeleteAuthorEffective() throws Exception{
         int i = mapper.deleteAuthor(3);
         assertTrue(i==1);
     }
     @Test
-    public void TestDeleteAuthorInEffective() throws Exception{
+    public void testDeleteAuthorInEffective() throws Exception{
         int i = mapper.deleteAuthor(3000);
         assertTrue(i==0);
+    }
+
+    @Test
+    public void testSelectAuthor() throws Exception{
+        List<Author> authors = mapper.selectAuthor();
+        assertTrue(authors.size()>0);
+    }
+
+    @Test
+    public void testSelectAuthorName() throws Exception{
+        List<Author> authors = mapper.selectAuthorName(5);
+        assertTrue(authors.get(0).getUsername()!=null);
+    }
+    @Test
+    public void testSelectAuthor2Construct() throws Exception{
+        List<Author> authors = mapper.selectAuthor2Construct();
+        assertTrue(authors.get(0).getUsername()!=null);
     }
 
 }

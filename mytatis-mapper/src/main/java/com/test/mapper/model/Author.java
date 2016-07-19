@@ -23,6 +23,12 @@ public class Author implements Serializable {
         this.bio = bio;
     }
 
+    public Author(Integer id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }
