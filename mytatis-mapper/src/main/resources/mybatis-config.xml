@@ -21,7 +21,7 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="com.test.mapper.mapper/PersonMapper.xml"/>
-        <mapper resource="com.test.mapper.mapper/AuthorMapper.xml"/>
+        <!--<mapper resource="com.test.mapper.dao/AuthorMapper.xml"/>-->
+        <package name="com.test.mapper.dao"/>
     </mappers>
 </configuration>

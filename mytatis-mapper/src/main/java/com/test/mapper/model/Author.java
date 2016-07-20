@@ -23,6 +23,12 @@ public class Author implements Serializable {
         this.bio = bio;
     }
 
+    public Author(Integer id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +67,16 @@ public class Author implements Serializable {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
     }
 }

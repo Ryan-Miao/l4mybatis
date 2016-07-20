@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.mapper.dao.AuthorMapper">
+    <insert id="insertAuthor" useGeneratedKeys="true" keyProperty="id" parameterType="author">
+        INSERT INTO author(username,password,email,bio)
+        VALUES (#{username},#{password},#{email},#{bio})
+    </insert>
+
+    <insert id="insertAuthors" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO author(username,password,email,bio) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.username},#{item.password},#{item.email},#{item.bio})
+        </foreach>
+    </insert>
+
+    <select id="selectAuthorById" resultType="author">
+        SELECT * FROM author WHERE id = #{id}
+    </select>
+
+    <update id="updateAuthor" >
+        update Author set
+            username = #{username},
+            password = #{password},
+            email = #{email},
+            bio = #{bio}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAuthor">
+        delete from Author where id = #{id}
+    </delete>
+
+    <sql id="userColumns">
+        ${alias}.id,${alias}.username,${alias}.password,${alias}.email,${alias}.bio
+    </sql>
+    <select id="selectAuthor" resultType="map">
+        SELECT 
+          <include refid="userColumns"><property name="alias" value="t1"/></include>
+        FROM author t1
+    </select>
+
+    <!--    -->
+    <resultMap id="authorName" type="author">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+    </resultMap>
+    <select id="selectAuthorName" resultMap="authorName">
+        SELECT  username,password FROM author WHERE id = #{id}
+    </select>
+    
+    <!--  -->
+    <resultMap id="authorByConstructor" type="author">
+        <constructor>
+            <idArg column="id" javaType="int"/>
+            <arg column="username" javaType="String"/>
+            <arg column="password" javaType="String"/>
+        </constructor>
+        <result column="email" property="email"/>
+    </resultMap>
+    <select id="selectAuthor2Construct" resultMap="authorByConstructor">
+        SELECT * FROM author
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
