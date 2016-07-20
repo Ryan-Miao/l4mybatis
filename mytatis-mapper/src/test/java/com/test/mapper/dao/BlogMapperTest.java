@@ -37,8 +37,8 @@ public class BlogMapperTest {
 
     @Test
     public void testSelectBlog() throws Exception{
-        List<Blog> blogs = mapper.selectBlog(1);
-        System.out.println(blogs);
+        Blog blog = mapper.selectBlog(1);
+        assertNotNull(blog.getAuthor().getUsername());
     }
 
 }
