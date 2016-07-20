@@ -9,7 +9,6 @@ Source Database       : mybatis
 Target Server Type    : MYSQL
 Target Server Version : 50605
 File Encoding         : 65001
-
 Date: 2016-07-20 23:20:22
 */
 
