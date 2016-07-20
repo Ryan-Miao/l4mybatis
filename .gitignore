@@ -2,7 +2,9 @@
 
 .idea/
 mybatis.iml
-*.impl
+l4mybatis.iml
+mybatis-starter/mybatis-starter.iml
+mytatis-mapper/mytatis-mapper.iml
 
 */*.iml
 */target/
