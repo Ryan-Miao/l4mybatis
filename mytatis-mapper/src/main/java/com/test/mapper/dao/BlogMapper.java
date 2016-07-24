@@ -10,4 +10,10 @@ import java.util.List;
 public interface BlogMapper {
 
     Blog selectBlog(Integer id);
+
+    Blog selectBlogWithAuthor(Integer id);
+
+    Blog selectBlogWithAuthor2(Integer id);
+
+    Blog selectBlogWithPost(Integer id);
 }

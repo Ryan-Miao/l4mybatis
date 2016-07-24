@@ -41,4 +41,23 @@ public class BlogMapperTest {
         assertNotNull(blog.getAuthor().getUsername());
     }
 
+    @Test
+    public void testSelectBlogWithAuthor() throws Exception{
+        Blog blog = mapper.selectBlogWithAuthor(1);
+        assertNotNull(blog.getAuthor().getUsername());
+        return;
+    }
+    @Test
+    public void testSelectBlogWithAuthor2() throws Exception{
+        Blog blog = mapper.selectBlogWithAuthor2(1);
+        assertNotNull(blog.getCoAuthor().getUsername());
+        return;
+    }
+    @Test
+    public void selectBlogWithPost() throws Exception{
+        Blog blog = mapper.selectBlogWithPost(1);
+        assertNotNull(blog.getPosts().get(0));
+        return;
+    }
+
 }

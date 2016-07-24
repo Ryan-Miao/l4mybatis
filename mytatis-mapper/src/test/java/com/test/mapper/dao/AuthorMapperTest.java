@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -73,11 +74,18 @@ public class AuthorMapperTest {
         Author author = mapper.selectAuthorById(3);
         assertNotNull(author);
     }
+    @Test
+    public void testSelectAuthorName() throws Exception{
+        List<Author> authors = mapper.selectAuthorName(5);
+        assertTrue(authors.get(0).getUsername()!=null);
+    }
 
     @Test
     public void testUpdateAuthorEffective() throws Exception{
         Author author = mapper.selectAuthorById(3);
-        author.setBio("I have changed the bio");
+        if (author==null)
+            return;
+        author.setBio("uuid:"+ UUID.randomUUID());
         int i = mapper.updateAuthor(author);
         sqlSession.commit();
         assertTrue(i>0);
@@ -91,16 +99,6 @@ public class AuthorMapperTest {
         assertTrue(i==0);
     }
 
-    @Test
-    public void testDeleteAuthorEffective() throws Exception{
-        int i = mapper.deleteAuthor(3);
-        assertTrue(i==1);
-    }
-    @Test
-    public void testDeleteAuthorInEffective() throws Exception{
-        int i = mapper.deleteAuthor(3000);
-        assertTrue(i==0);
-    }
 
     @Test
     public void testSelectAuthor() throws Exception{
@@ -108,15 +106,32 @@ public class AuthorMapperTest {
         assertTrue(authors.size()>0);
     }
 
-    @Test
-    public void testSelectAuthorName() throws Exception{
-        List<Author> authors = mapper.selectAuthorName(5);
-        assertTrue(authors.get(0).getUsername()!=null);
-    }
+
     @Test
     public void testSelectAuthor2Construct() throws Exception{
         List<Author> authors = mapper.selectAuthor2Construct();
         assertTrue(authors.get(0).getUsername()!=null);
     }
+
+    @Test
+    public void testDeleteAuthorEffective() throws Exception{
+        int id = 40;
+        Author author = mapper.selectAuthorById(id);
+        if (author==null){
+            return;
+        }
+        int i = mapper.deleteAuthor(id);
+        assertTrue(i==1);
+        sqlSession.rollback();
+        sqlSession.commit();
+        testUpdateAuthorEffective();
+    }
+    @Test
+    public void testDeleteAuthorInEffective() throws Exception{
+        int i = mapper.deleteAuthor(30000);
+        assertTrue(i==0);
+        sqlSession.commit();
+    }
+
 
 }

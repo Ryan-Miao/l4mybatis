@@ -5,11 +5,105 @@
 
 <mapper namespace="com.test.mapper.dao.BlogMapper">
     <resultMap id="blogResult" type="blog">
-        <association property="author" column="author_id" javaType="author" select="com.test.mapper.dao.AuthorMapper.selectAuthorById"/>
+        <association property="author" column="author_id" javaType="author"
+                     select="com.test.mapper.dao.AuthorMapper.selectAuthorById"/>
     </resultMap>
     <select id="selectBlog" resultMap="blogResult">
         select * from blog where id = #{id}
     </select>
+
+    <!-- association result -->
+    <select id="selectBlogWithAuthor" resultMap="blogResultWithAuthor">
+        SELECT
+          b.id        as blog_id,
+          b.name      as blog_title,
+          b.author_id as blog_author_id,
+          a.id        as author_id,
+          a.username  as author_username,
+          a.password  as author_password,
+          a.email     as author_email,
+          a.bio       as author_bio
+        FROM blog b LEFT OUTER JOIN author a ON b.author_id=a.id
+        WHERE b.id = #{id}
+    </select>
+    <resultMap id="blogResultWithAuthor" type="blog">
+        <id property="id" column="blog_id"/>
+        <result property="name" column="blog_title"/>
+        <association property="author" column="blog_author_id" javaType="author" resultMap="authorResult"/>
+    </resultMap>
+    <resultMap id="authorResult" type="author">
+        <id property="id" column="author_id"/>
+        <result property="username" column="author_username"/>
+        <result property="password" column="author_password"/>
+        <result property="email" column="author_email"/>
+        <result property="bio" column="author_bio"/>
+    </resultMap>
+
+
+    <!-- association 2 -->
+    <select id="selectBlogWithAuthor2" resultMap="blogResultWithAuthor2">
+        SELECT
+        b.id        as blog_id,
+        b.name      as blog_title,
+        b.author_id as blog_author_id,
+        a.id        as author_id,
+        a.username  as author_username,
+        a.password  as author_password,
+        a.email     as author_email,
+        a.bio       as author_bio,
+        ca.id        as co_author_id,
+        ca.username  as co_author_username,
+        ca.password  as co_author_password,
+        ca.email     as co_author_email,
+        ca.bio       as co_author_bio
+        FROM blog b
+        LEFT OUTER JOIN author a ON b.author_id=a.id
+        LEFT OUTER JOIN author ca ON b.co_author_id=ca.id
+        WHERE b.id = #{id}
+    </select>
+    <resultMap id="blogResultWithAuthor2" type="Blog">
+        <id property="id" column="blog_id"/>
+        <result property="name" column="blog_title"/>
+        <association property="author" resultMap="authorResult"/>
+        <association property="coAuthor" resultMap="authorResult"
+                     columnPrefix="co_"/>
+    </resultMap>
+
+    <!-- collection -->
+    <select id="selectBlogWithPost" resultMap="blogResultWithPost">
+        SELECT
+        b.id    AS   blog_id,
+        b.name  AS   blog_name,
+        b.author_id AS blog_author_id,
+        p.id        AS post_id,
+        p.subject   AS post_subject,
+        p.body      AS post_body
+        FROM blog b
+        LEFT OUTER JOIN post p ON b.id=p.blog_id
+        WHERE b.id=#{id}
+    </select>
+    <resultMap id="blogResultWithPost" type="Blog">
+        <id property="id" column="blog_id"/>
+        <result property="name" column="blog_name"/>
+        <collection property="posts" ofType="Post">
+            <id property="id" column="post_id"/>
+            <result property="subject" column="post_subject"/>
+            <result property="body" column="post_body"/>
+        </collection>
+    </resultMap>
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

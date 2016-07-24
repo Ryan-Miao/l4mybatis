@@ -20,7 +20,7 @@
         SELECT * FROM author WHERE id = #{id}
     </select>
 
-    <update id="updateAuthor" >
+    <update id="updateAuthor" parameterType="author">
         update Author set
             username = #{username},
             password = #{password},
