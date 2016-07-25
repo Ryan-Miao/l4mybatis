@@ -85,11 +85,12 @@
     <resultMap id="blogResultWithPost" type="Blog">
         <id property="id" column="blog_id"/>
         <result property="name" column="blog_name"/>
-        <collection property="posts" ofType="Post">
-            <id property="id" column="post_id"/>
-            <result property="subject" column="post_subject"/>
-            <result property="body" column="post_body"/>
-        </collection>
+        <collection property="posts" ofType="Post" resultMap="postResult" columnPrefix="post_"/>
+    </resultMap>
+    <resultMap id="postResult" type="Post">
+        <id property="id" column="id"/>
+        <result property="subject" column="subject"/>
+        <result property="body" column="body"/>
     </resultMap>
     
 

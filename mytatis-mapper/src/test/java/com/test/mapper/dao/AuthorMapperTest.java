@@ -73,6 +73,11 @@ public class AuthorMapperTest {
     public void selectAuthorByIdTest() throws Exception{
         Author author = mapper.selectAuthorById(3);
         assertNotNull(author);
+        System.out.println(1111111);
+        mapper.selectAuthorById(3);
+        System.out.println("-----------------");
+        mapper.selectAuthorById(3);
+//        mapper.selectAuthorById(6);
     }
     @Test
     public void testSelectAuthorName() throws Exception{
