@@ -11,6 +11,15 @@ public class Blog {
     private Author author;
     private Author coAuthor;
     private List<Post> posts;
+    private String state;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public List<Post> getPosts() {
         return posts;
@@ -58,6 +67,9 @@ public class Blog {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author=" + author +
+                ", coAuthor=" + coAuthor +
+                ", posts=" + posts +
+                ", state='" + state + '\'' +
                 '}';
     }
 }

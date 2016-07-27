@@ -54,9 +54,24 @@ public class BlogMapperTest {
         return;
     }
     @Test
-    public void selectBlogWithPost() throws Exception{
+    public void testSelectBlogWithPost() throws Exception{
         Blog blog = mapper.selectBlogWithPost(1);
         assertNotNull(blog.getPosts().get(0));
+        return;
+    }
+    @Test
+    public void testFindActiveBlogWithNameLike() throws Exception{
+        Blog key = new Blog();
+        key.setName("test%");
+        List<Blog> blogs = mapper.findActiveBlogWithNameLike(key);
+        System.out.println(blogs);
+        return;
+    }
+    @Test
+    public void testFindActiveBlogWithNameLikeByString() throws Exception{
+
+        List<Blog> blogs = mapper.findActiveBlogWithNameLikeByString("test%");
+        System.out.println(blogs);
         return;
     }
 

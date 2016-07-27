@@ -8,7 +8,7 @@
         <association property="author" column="author_id" javaType="author"
                      select="com.test.mapper.dao.AuthorMapper.selectAuthorById"/>
     </resultMap>
-    <select id="selectBlog" resultMap="blogResult">
+    <select id="selectBlog" parameterType="int" resultMap="blogResult">
         select * from blog where id = #{id}
     </select>
 
@@ -92,6 +92,21 @@
         <result property="subject" column="subject"/>
         <result property="body" column="body"/>
     </resultMap>
+
+    <!-- Dynamic SQL -->
+    <select id="findActiveBlogWithNameLike"  resultType="Blog">
+        SELECT * FROM blog
+        WHERE state = 'active'
+        <if test="name != null">
+            AND name LIKE #{name}
+        </if>
+    </select>
+
+    <select id="findActiveBlogWithNameLikeByString" parameterType="java.lang.String" resultType="Blog">
+        SELECT * FROM blog
+        WHERE name LIKE '${key}'
+    </select>
+
     
 
 
