@@ -107,6 +107,53 @@
         WHERE name LIKE '${key}'
     </select>
 
+    <select id="findActiveBlogLike" resultType="Blog">
+        SELECT * FROM blog b, author a
+        WHERE state = 'active'
+        <if test="name != null">
+            AND name LIKE #{name}
+        </if>
+        AND b.author_id = a.id
+        <if test="author != null and author.username != null">
+            AND a.username  LIKE #{author.username}
+        </if>
+    </select>
+
+    <select id="findBlogMap" resultMap="findBlogResultMap">
+        SELECT b.id AS id,
+                b.name AS name,
+                b.state AS state,
+                a.id        as author_id,
+                a.username  as author_username,
+                a.password  as author_password,
+                a.email     as author_email,
+                a.bio       as author_bio
+        FROM blog b, author a
+        WHERE state = 'active'
+        <if test="name != null">
+            AND name LIKE #{name}
+        </if>
+        AND b.author_id = a.id
+        <if test="author != null and author.username != null">
+            AND a.username  LIKE #{author.username}
+        </if>
+    </select>
+    <resultMap id="findBlogResultMap" type="Blog">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="state" column="state"/>
+        <association property="author" resultMap="authorResult"/>
+        <!--<association property="author" column="author_id" javaType="Author">-->
+            <!--<id property="id" column="author_id"/>-->
+            <!--<result property="username" column="author_username"/>-->
+            <!--<result property="password" column="author_password"/>-->
+            <!--<result property="email" column="author_email"/>-->
+            <!--<result property="bio" column="author_bio"/>-->
+        <!--</association>-->
+    </resultMap>
+
+
+
     
 
 

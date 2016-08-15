@@ -1,5 +1,6 @@
 package com.test.mapper.dao;
 
+import com.test.mapper.model.Author;
 import com.test.mapper.model.Blog;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -74,5 +75,31 @@ public class BlogMapperTest {
         System.out.println(blogs);
         return;
     }
+    @Test
+    public void testFindActiveBlogLike() throws Exception{
+        Blog blog = new Blog();
+        blog.setName("%Insert");
+        Author author = new Author();
+        author.setUsername("Ryan%");
+        blog.setAuthor(author);
+        List<Blog> blogs = mapper.findActiveBlogLike(blog);
+        System.out.println(blogs);
+        assertTrue(blogs.size()==2);
+    }
+
+
+    @Test
+    public void testFindBlogMap() throws Exception{
+        Blog blog = new Blog();
+        blog.setName("%Insert");
+        Author author = new Author();
+        author.setUsername("Ryan%");
+        blog.setAuthor(author);
+        List<Blog> blogs = mapper.findBlogMap(blog);
+        System.out.println(blogs);
+        assertTrue(blogs.size()==2);
+    }
+
+
 
 }

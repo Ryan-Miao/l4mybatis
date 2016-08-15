@@ -20,6 +20,9 @@ public interface BlogMapper {
 
     List<Blog> findActiveBlogWithNameLike(Blog blog);
 
-
     List<Blog> findActiveBlogWithNameLikeByString(@Param(value = "key") String key);
+
+    List<Blog> findActiveBlogLike(Blog blog);
+
+    List<Blog> findBlogMap(Blog blog);
 }
